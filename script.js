@@ -104,6 +104,77 @@ function adicionarAoCarrinho(produtoId, nomeProduto, precoProduto) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  const contatoForm = document.getElementById("contatoForm");
+  if (contatoForm) {
+    const feedbackEl = document.getElementById("contatoFeedback");
+    const submitBtn = contatoForm.querySelector('button[type="submit"]');
+    const defaultBtnLabel = submitBtn
+      ? submitBtn.textContent
+      : "Enviar Mensagem";
+
+    contatoForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const accessKey = contatoForm
+        .querySelector('input[name="access_key"]')
+        ?.value?.trim();
+
+      if (!accessKey || accessKey.includes("COLE_SUA_ACCESS_KEY_WEB3FORMS")) {
+        if (feedbackEl) {
+          feedbackEl.textContent =
+            "Configure a access_key do Web3Forms para ativar o envio do formulário.";
+          feedbackEl.className = "contato-feedback error";
+        }
+        return;
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.classList.add("is-loading");
+        submitBtn.textContent = "Enviando...";
+      }
+
+      if (feedbackEl) {
+        feedbackEl.textContent = "Enviando sua mensagem...";
+        feedbackEl.className = "contato-feedback";
+      }
+
+      try {
+        const formData = new FormData(contatoForm);
+        const response = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          body: formData,
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          if (feedbackEl) {
+            feedbackEl.textContent =
+              "Mensagem enviada com sucesso! Em breve entraremos em contato.";
+            feedbackEl.className = "contato-feedback success";
+          }
+          contatoForm.reset();
+          window.location.href = "mensagem_enviada.html";
+        } else {
+          throw new Error(data?.message || "Falha ao enviar mensagem.");
+        }
+      } catch (error) {
+        if (feedbackEl) {
+          feedbackEl.textContent =
+            "Não foi possível enviar agora. Tente novamente em instantes.";
+          feedbackEl.className = "contato-feedback error";
+        }
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.classList.remove("is-loading");
+          submitBtn.textContent = defaultBtnLabel;
+        }
+      }
+    });
+  }
+
   if (document.querySelector(".cardapio-container")) {
     const botoes = document.querySelectorAll(".btn-comprar");
     botoes.forEach((botao) => {
@@ -147,8 +218,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const formCheckout = document.getElementById("formCheckout");
     if (formCheckout) {
+      const telefoneInput = document.getElementById("telefoneCliente");
+      const cepInput = document.getElementById("cepCliente");
+      const numeroInput = document.getElementById("numeroCliente");
+
+      if (telefoneInput) {
+        telefoneInput.addEventListener("input", () => {
+          telefoneInput.value = formatarTelefone(telefoneInput.value);
+        });
+      }
+
+      if (cepInput) {
+        cepInput.addEventListener("input", () => {
+          cepInput.value = formatarCep(cepInput.value);
+        });
+      }
+
+      if (numeroInput) {
+        numeroInput.addEventListener("input", () => {
+          numeroInput.value = numeroInput.value.replace(/\D/g, "");
+        });
+      }
+
       formCheckout.addEventListener("submit", (e) => {
         e.preventDefault();
+        if (!formCheckout.reportValidity()) {
+          return;
+        }
+        if (!validarCamposCheckout()) {
+          return;
+        }
         finalizarCompra();
       });
     }
@@ -252,6 +351,85 @@ function esconderCheckout() {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
+function formatarTelefone(valor) {
+  const digitos = valor.replace(/\D/g, "").slice(0, 11);
+
+  if (digitos.length <= 2) {
+    return digitos;
+  }
+
+  if (digitos.length <= 6) {
+    return `(${digitos.slice(0, 2)}) ${digitos.slice(2)}`;
+  }
+
+  if (digitos.length <= 10) {
+    return `(${digitos.slice(0, 2)}) ${digitos.slice(2, 6)}-${digitos.slice(6)}`;
+  }
+
+  return `(${digitos.slice(0, 2)}) ${digitos.slice(2, 7)}-${digitos.slice(7)}`;
+}
+
+function formatarCep(valor) {
+  const digitos = valor.replace(/\D/g, "").slice(0, 8);
+
+  if (digitos.length <= 5) {
+    return digitos;
+  }
+
+  return `${digitos.slice(0, 5)}-${digitos.slice(5)}`;
+}
+
+function validarCamposCheckout() {
+  const emailInput = document.getElementById("emailCliente");
+  const telefoneInput = document.getElementById("telefoneCliente");
+  const cepInput = document.getElementById("cepCliente");
+  const numeroInput = document.getElementById("numeroCliente");
+
+  const email = emailInput.value.trim();
+  const telefone = telefoneInput.value.trim();
+  const cep = cepInput.value.trim();
+  const numero = numeroInput.value.trim();
+  const telefoneDigitos = telefone.replace(/\D/g, "");
+  const cepDigitos = cep.replace(/\D/g, "");
+
+  emailInput.setCustomValidity("");
+  telefoneInput.setCustomValidity("");
+  cepInput.setCustomValidity("");
+  numeroInput.setCustomValidity("");
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    emailInput.setCustomValidity("Informe um e-mail válido.");
+    emailInput.reportValidity();
+    return false;
+  }
+
+  if (telefoneDigitos.length !== 10 && telefoneDigitos.length !== 11) {
+    telefoneInput.setCustomValidity(
+      "Informe um telefone válido com DDD. Ex.: (81) 99140-1545",
+    );
+    telefoneInput.reportValidity();
+    return false;
+  }
+
+  telefoneInput.value = formatarTelefone(telefoneDigitos);
+
+  if (cepDigitos.length !== 8) {
+    cepInput.setCustomValidity("Informe um CEP válido. Ex.: 55012-100");
+    cepInput.reportValidity();
+    return false;
+  }
+
+  cepInput.value = formatarCep(cepDigitos);
+
+  if (!/^\d+$/.test(numero)) {
+    numeroInput.setCustomValidity("Informe apenas números no campo Número.");
+    numeroInput.reportValidity();
+    return false;
+  }
+
+  return true;
+}
+
 function finalizarCompra() {
   const nome = document.getElementById("nomeCliente").value;
   const email = document.getElementById("emailCliente").value;
@@ -271,8 +449,8 @@ function finalizarCompra() {
         numero: document.getElementById("numeroCliente").value,
         complemento: document.getElementById("complementoCliente").value,
         bairro: document.getElementById("bairroCliente").value,
-        cidade: document.getElementById("cidadeCliente").value,
-        estado: document.getElementById("estadoCliente").value,
+        cidade: "Caruaru",
+        estado: "PE",
         cep: document.getElementById("cepCliente").value,
       },
       observacoes: document.getElementById("obsCliente").value,
@@ -288,11 +466,7 @@ function finalizarCompra() {
 
   Carrinho.limpar();
 
-  alert(
-    `Pedido realizado com sucesso! \n\nPedido de ${nome}\nTotal: R$ ${calcularTotalPedido(itens).toFixed(2)}`,
-  );
-
-  window.location.href = "cardapio.html";
+  window.location.href = "compra_concluida.html";
 }
 
 function calcularTotalPedido(itens) {

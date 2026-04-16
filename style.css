@@ -1542,6 +1542,91 @@ iconify-icon {
   color: #5c3d1a;
 }
 
+.btn-enviar.is-loading,
+.btn-enviar:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.hidden-botcheck {
+  display: none;
+}
+
+.contato-feedback {
+  margin: 12px 0 0;
+  font-size: 0.9rem;
+  color: #5c3d1a;
+  min-height: 1.3em;
+}
+
+.contato-feedback.success {
+  color: #2e7d32;
+}
+
+.contato-feedback.error {
+  color: #b23b3b;
+}
+
+.contato-config-hint {
+  margin: 6px 0 0;
+  font-size: 0.8rem;
+  color: #7a6f62;
+}
+
+.contato-config-hint code {
+  background: rgba(92, 61, 26, 0.08);
+  color: #5c3d1a;
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+.mensagem-enviada-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.mensagem-enviada-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  padding: 48px 28px;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.mensagem-enviada-check {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  background: #5c3d1a;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+.mensagem-enviada-card h1 {
+  color: #5c3d1a;
+  margin: 0 0 8px;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+}
+
+.mensagem-enviada-card p {
+  margin: 0 0 24px;
+  color: #4a4a4a;
+  font-size: 1rem;
+}
+
+.mensagem-enviada-card .btn-voltar {
+  min-width: 180px;
+}
+
 .info-item h4 {
   color: #5c3d1a;
   margin-bottom: 10px;
@@ -2086,5 +2171,20 @@ iconify-icon {
   .btn-voltar-carrinho {
     padding: 12px;
     font-size: 0.8rem;
+  }
+
+  .mensagem-enviada-card {
+    padding: 36px 18px;
+    border-radius: 10px;
+  }
+
+  .mensagem-enviada-check {
+    width: 62px;
+    height: 62px;
+    font-size: 1.9rem;
+  }
+
+  .mensagem-enviada-card p {
+    font-size: 0.95rem;
   }
 }
