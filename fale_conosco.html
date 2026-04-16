@@ -44,7 +44,29 @@
 
       <section class="container section-padding">
         <div class="contato-wrapper">
-          <form class="contato-form">
+          <form id="contatoForm" class="contato-form">
+            <input
+              type="hidden"
+              name="access_key"
+              value="COLE_SUA_ACCESS_KEY_WEB3FORMS"
+            />
+            <input
+              type="hidden"
+              name="subject"
+              value="Novo contato - Panificadora São Paulo"
+            />
+            <input
+              type="hidden"
+              name="from_name"
+              value="Site Panificadora São Paulo"
+            />
+            <input
+              type="checkbox"
+              name="botcheck"
+              class="hidden-botcheck"
+              tabindex="-1"
+              autocomplete="off"
+            />
             <div class="form-group">
               <label for="nome">Nome Completo</label>
               <input
@@ -91,6 +113,15 @@
             </div>
 
             <button type="submit" class="btn-enviar">Enviar Mensagem</button>
+            <p
+              id="contatoFeedback"
+              class="contato-feedback"
+              aria-live="polite"
+            ></p>
+            <p class="contato-config-hint">
+              Configure sua chave do Web3Forms no campo
+              <code>access_key</code> para ativar o envio.
+            </p>
           </form>
 
           <div class="contato-info-lateral">
