@@ -1,91 +1,79 @@
-# Panificadora São Paulo 🥖
+# <h1 align="center">Panificadora São Paulo 🥖</h1>
 
-Projeto de site institucional completo para padaria/panificadora, com páginas informativas, cardápio, carrinho de compras e fluxo de finalização.
+<div align="center">
 
-## ✨ Funcionalidades
+![Status](https://img.shields.io/static/v1?label=STATUS&message=CONCLU%C3%8DDO&color=008000&style=for-the-badge)
+![License](https://img.shields.io/static/v1?label=LICENSE&message=MIT&color=5c3d1a&style=for-the-badge)
 
-- Página inicial com destaque da marca
-- Cardápio com produtos e botão de compra
-- Carrinho com armazenamento em `localStorage`
-- Checkout com validações de formulário
-- Página de compra concluída
-- Página de contato com envio via Web3Forms
-- Página de confirmação de mensagem enviada
-- Layout responsivo (mobile/tablet/desktop)
-- Menu hambúrguer em telas menores
+</div>
 
-## 📄 Páginas
+## 🧾 Resumo do projeto
+Este projeto consiste no desenvolvimento de uma **plataforma institucional e e-commerce** para a Panificadora São Paulo, uma empresa tradicional de Caruaru-PE. A aplicação foca na experiência do usuário (UX) e na preservação da identidade cultural da marca, integrando a história familiar com tecnologias modernas de desenvolvimento web.
 
-- `index.html` — Home
-- `cardapio.html` — Produtos
-- `compra.html` — Carrinho e checkout
-- `compra_concluida.html` — Confirmação de pedido
-- `fale_conosco.html` — Formulário de contato
-- `mensagem_enviada.html` — Confirmação de mensagem
-- `sobre.html` — Sobre a empresa
-- `serviços.html` — Serviços
+O objetivo principal é demonstrar o domínio de **Frontend Nativo (Vanilla JS)**, manipulação de estados via **LocalStorage** e integração com serviços de terceiros (**Web3Forms**) para automação de comunicação B2B e B2C.
 
-## 🧱 Stack utilizada
+---
 
-- HTML5
-- CSS3
-- JavaScript (Vanilla)
-- `localStorage` (carrinho)
-- Web3Forms (envio de formulário)
+## 🎬 Demonstração em Ação
 
-## 🚀 Como executar localmente
 
-Como é um projeto estático, basta abrir com servidor local.
+### Desktop
+<p align="center">
+  <video src="https://github.com/user-attachments/assets/5a188684-e4bb-4cb5-ac01-2de09d63f774" width="850" autoplay muted loop playsinline>
+    Seu navegador não suporta vídeos incorporados.
+  </video>
+</p>
+<p align="center"><em>Fluxo de navegação: Home, Cardápio Dinâmico, Carrinho de Compras e Formulário de Contato.</em></p>
 
-### Opção 1: Python
+### Mobile
+<p align="center">
+  <video src="https://github.com/user-attachments/assets/324a90ca-cf41-454e-8030-81c69dde5236" width="350" alt="Demonstração Mobile">
+</p>
+<p align="center"><em>Responsividade e navegação no Celular.</em></p>
 
-```powershell
-python -m http.server 8000
-```
+---
 
-Depois, abra no navegador:
+## 🛠️ Tecnologias e Ferramentas
 
-- `http://localhost:8000`
+Para este projeto, optei por tecnologias nativas para garantir máxima performance e demonstrar sólidos conhecimentos em fundamentos de Web Development:
 
-### Opção 2: Extensão Live Server (VS Code)
+<div align="center">
 
-- Abra a pasta do projeto no VS Code
-- Clique com o botão direito em `index.html`
-- Selecione **Open with Live Server**
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![VSCode](https://img.shields.io/badge/VS_Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
 
-## ⚙️ Configuração do formulário de contato
+</div>
 
-No arquivo `fale_conosco.html`, configure a chave do Web3Forms:
+---
 
-```html
-<input type="hidden" name="access_key" value="COLE_SUA_ACCESS_KEY_WEB3FORMS" />
-```
+## 🔨 Funcionalidades do projeto
 
-> Importante: para publicar no GitHub, mantenha placeholder no repositório e use sua chave real apenas em deploy/local.
+- **Cardápio Interativo:** Listagem de produtos com sistema de cards e botões de compra.
+- **Carrinho de Compras (Persistence):** Gerenciamento de itens utilizando `localStorage`, permitindo que o usuário não perca o pedido ao atualizar a página.
+- **Scroll Horizontal Dinâmico:** Implementação de carrossel de depoimentos com suporte a scroll manual e conversão de `deltaY` para movimento horizontal via JS.
+- **Fale Conosco Automatizado:** Integração com Web3Forms para recebimento de elogios, reclamações e propostas B2B diretamente no e-mail.
+- **Checkout Inteligente:** Validação de campos via RegEx (Telefone, CEP e E-mail) e cálculo automático de taxas de entrega.
+- **Layout Editorial:** Design inspirado na marca Benjamin Padaria, com foco em tipografia clássica (Lora) e respiro visual.
 
-## 🔐 Segurança (publicação em GitHub/LinkedIn)
+---
 
-- Não commitar segredos privados (senhas, tokens, secret keys)
-- Chaves públicas podem aparecer no frontend, mas use restrição por domínio no provedor
-- Revogue/rotacione chaves se já tiverem sido expostas
+## 📁 Acesso ao projeto
 
-## 📁 Estrutura do projeto
+Você pode interagir com a aplicação diretamente pelo deploy ou acessar o código-fonte:
 
-```text
-html_mouratech/
-├── index.html
-├── cardapio.html
-├── compra.html
-├── compra_concluida.html
-├── fale_conosco.html
-├── mensagem_enviada.html
-├── sobre.html
-├── serviços.html
-├── style.css
-├── script.js
-└── img/
-```
+- **🔗 Aplicação Online:** [Link do Deploy aqui](https://panificadorasaopaulo.vercel.app/)
+- **💻 Código Fonte:** [Repositório Panificadora São Paulo](https://github.com/AbnerBarretto/html_mouratech)
+- **⬇️ Baixar ZIP:** [Download do Projeto](https://github.com/AbnerBarretto/html_mouratech/archive/refs/heads/main.zip)
 
-## 👤 Autor
+---
 
-Projeto desenvolvido por **Abner Barretto**.
+## 🚀 Como Executar o Projeto Localmente
+
+Como é um projeto estático focado em frontend, você pode executar de forma simples:
+
+1. **Clone o repositório:**
+   ```bash
+   git clone [https://github.com/AbnerBarretto/html_mouratech.git](https://github.com/AbnerBarretto/html_mouratech.git)
