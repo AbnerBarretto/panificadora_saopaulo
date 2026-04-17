@@ -19,7 +19,7 @@ O objetivo principal é demonstrar o domínio de **Frontend Nativo (Vanilla JS)*
 
 ### Desktop
 <p align="center">
-  <video src="https://github.com/user-attachments/assets/9fd64bd7-8764-4d4b-8fce-78e2b4b2071b" width="850" autoplay muted loop playsinline>
+  <video src="https://github.com/user-attachments/assets/5a188684-e4bb-4cb5-ac01-2de09d63f774" width="850" autoplay muted loop playsinline>
     Seu navegador não suporta vídeos incorporados.
   </video>
 </p>
@@ -27,7 +27,7 @@ O objetivo principal é demonstrar o domínio de **Frontend Nativo (Vanilla JS)*
 
 ### Mobile
 <p align="center">
-  <video src="https://github.com/user-attachments/assets/136512e7-fdaf-4cab-9688-db87bd2f2eec" width="350" alt="Demonstração Mobile">
+  <video src="https://github.com/user-attachments/assets/324a90ca-cf41-454e-8030-81c69dde5236" width="350" alt="Demonstração Mobile">
 </p>
 <p align="center"><em>Responsividade e navegação no Celular.</em></p>
 
